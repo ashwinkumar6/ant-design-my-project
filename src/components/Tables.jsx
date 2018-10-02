@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { Table, Radio, Form } from "antd";
+import { Table} from "antd";
 
 import "./Tables.css";
 import data from '../assets/data';
 import columns from '../assets/tableData/tableColumn';
-
-
-const FormItem = Form.Item;
 
 const dataSource = [];
 data.logs.forEach(log => {
@@ -26,15 +23,6 @@ class Tables extends Component {
   render() {
     return (
       <div>
-        <span className="btn-grp">
-          <FormItem>
-            <Radio.Group>
-              <Radio.Button value="successful"> Successful </Radio.Button>
-              <Radio.Button value="failed"> Failed </Radio.Button>
-              <Radio.Button value="all"> All </Radio.Button>
-            </Radio.Group>
-          </FormItem>
-        </span>
         <Table
           dataSource={dataSource}
           columns={columns}
