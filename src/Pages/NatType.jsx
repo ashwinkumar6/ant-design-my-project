@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Tabs } from "antd";
 
 import Tables from "../components/Tables";
 import Charts from "../components/Charts";
-import TabComp from "../components/TabComp";
+import { ChartGenerator } from "../components/TabComp"
+import DropdownOptions from "../components/SubComponents/DropDownRender";
+import RenderPieChart from "../components/SubComponents/PieChartRender"
+  
+const TabPane = Tabs.TabPane;
+function callback(key) {
+    console.log(key);
+}
 
 class NatType extends Component {
     render() {
         return (
             <div className="gutter-example">
-                <h1 style={{ padding: "10px 0px 0px 30px" }}>Connection Attempts</h1>
+                <h1 style={{ padding: "10px 0px 0px 30px" }}>Nat Type</h1>
                 <Row gutter={24} style={{ margin: "24px 8px" }}>
                     <Col className="gutter-row" span={24}>
                         <Card
@@ -19,7 +26,27 @@ class NatType extends Component {
                                 minHeight: 100
                             }}
                         >
-                            <TabComp pageName={"NAT Type"}/>
+                            <Tabs defaultActiveKey="1" onChange={callback} size="large">
+                                <TabPane tab={"All NAT Types"} key={1}/>
+                                <TabPane tab={"EDM"} key={2} />
+                                <TabPane tab={"EIM"} key={3} />
+                                <TabPane tab={"EDM Random"} key={4} />
+                                <TabPane tab={"EDM to EIM"} key={5} />
+                                <TabPane tab={"EIM to EDM Random"} key={6} />
+                                <TabPane tab={"EDM to EDM Random"} key={7} />
+                            </Tabs>
+
+                            <Row gutter={24} style={{ margin: "24px 8px" }}>
+                            <RenderPieChart passed={10} failed={4} /> 
+                            <RenderPieChart passed={10} failed={4} />
+                            <RenderPieChart passed={10} failed={4} />
+                            <RenderPieChart passed={10} failed={4} />
+                            <RenderPieChart passed={10} failed={4} />
+                            <RenderPieChart passed={10} failed={4} />
+                            <RenderPieChart passed={10} failed={4} />
+                            </Row>
+
+                            <DropdownOptions contents={["Protocol", "O.S.", "Country"]} />
                         </Card>
                     </Col>
                 </Row>
@@ -31,7 +58,7 @@ class NatType extends Component {
                                 borderRadius: 5,
                                 minHeight: 500
                             }}>
-                            <Charts />
+                            <ChartGenerator type={"tabbedLineChart"} tabName1={"Success Rate"} tabName2={"Failure Rate"} />
                         </Card>
                     </Col>
                 </Row>
