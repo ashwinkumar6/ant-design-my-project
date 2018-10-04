@@ -9,6 +9,7 @@ import ButtonGroup from "../components/ButtonGroup";
 //use pagetype to pass json obj to TabComp instead of hardCoding values
 import PageTypes from "../constants/page-types"
 import data from "../assets/data";
+import { LineChartArray } from "../assets/data"
 
 const osArr = [];
 data.logs.forEach((log) => {
@@ -41,7 +42,7 @@ const listOS = osName.map((os, i) => (
 ))
 
 const chartData=[
-    {"values":null,
+    {"values":LineChartArray,
     "dataSource":null,
     "interval":null
     },

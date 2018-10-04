@@ -8,7 +8,8 @@ import DropdownOptions from "../components/SubComponents/DropDownRender";
 import { ChartGenerator } from "../components/TabComp"
 import RenderPieChart from "../components/SubComponents/PieChartRender"
 import ButtonGroup from "../components/ButtonGroup";
-import data from "../assets/data";
+import data,{ LineChartArray } from "../assets/data";
+
 
 function callback(key) {
     console.log(key);
@@ -61,7 +62,7 @@ class Protocol extends Component {
                                 borderRadius: 5,
                                 minHeight: 500
                             }}>
-                            <ChartGenerator type={"tabbedLineChart"} tabName1={"Protocol Success Rate"} tabName2={"Protocol Failure Rate"} />
+                            <ChartGenerator type={"tabbedLineChart"} tabName1={"Protocol Success Rate"} tabName2={"Protocol Failure Rate"} data1={LineChartArray}/>
                         </Card>
                     </Col>
                 </Row>

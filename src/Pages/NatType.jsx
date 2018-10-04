@@ -7,7 +7,7 @@ import { ChartGenerator } from "../components/TabComp"
 import DropdownOptions from "../components/SubComponents/DropDownRender";
 import RenderPieChart from "../components/SubComponents/PieChartRender"
 import ButtonGroup from "../components/ButtonGroup";
-import data from "../assets/data";
+import data, { LineChartArray } from "../assets/data";
 
 const TabPane = Tabs.TabPane;
 function callback(key) {
@@ -66,7 +66,7 @@ class NatType extends Component {
                                 borderRadius: 5,
                                 minHeight: 500
                             }}>
-                            <ChartGenerator type={"tabbedLineChart"} tabName1={"Success Rate"} tabName2={"Failure Rate"} />
+                            <ChartGenerator type={"tabbedLineChart"} tabName1={"Success Rate"} tabName2={"Failure Rate"} data1={LineChartArray}/>
                         </Card>
                     </Col>
                 </Row>

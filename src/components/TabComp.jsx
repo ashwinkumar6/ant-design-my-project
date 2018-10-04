@@ -3,7 +3,6 @@ import { Tabs, Row, Col, Dropdown, Button, Icon, Menu, Card } from "antd";
 import DropdownOptions from "./SubComponents/DropDownRender";
 import Charts from "./Charts";
 import LineChart from "./LineChart";
-import { LineChartArray } from "../assets/data"
 const TabPane = Tabs.TabPane;
 
 
@@ -29,6 +28,7 @@ export class BarChartTabs extends Component {
 
 export class LineChartTabs extends Component {
   render() {
+    const {data}=this.props;
     return (
         <Row gutter={24} style={{ margin: "24px 8px" }}>
           <Col className="gutter-row" span={24}>
@@ -38,7 +38,7 @@ export class LineChartTabs extends Component {
                 borderRadius: 5,
                 minHeight: 500
               }}>
-              <LineChart data={LineChartArray} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
+              <LineChart data={data} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
             </Card>
           </Col>
         </Row>
@@ -52,9 +52,8 @@ export class ChartGenerator extends Component {
     console.log(key);
   }  
   render() {
-    console.log("inside tabbed line chart");
     const { type,tabName1,tabName2,data1, data2 } = this.props;
-    if (type === "BarChart") {
+    if (type === "tabbedBarChart") {
       return (
         <Tabs defaultActiveKey="1" onChange={this.callback} size="large">
           <TabPane tab={tabName1} key={1}>
@@ -67,6 +66,21 @@ export class ChartGenerator extends Component {
         </Tabs>
       )
     }
+    else if(type === "tabbedLineChart")
+    {
+      return (
+        <div>
+        <Tabs defaultActiveKey="1" onChange={this.callback} size="large">
+          <TabPane tab={tabName1} key={1}>
+            <LineChartTabs data={data1}/>
+          </TabPane>
+           <TabPane tab={tabName2} key={2}>
+            <LineChartTabs data={data1}/>
+          </TabPane>
+        </Tabs>
+        </div>
+      )
+    }
     else {
       return (
         <Row gutter={24} style={{ margin: "24px 8px" }}>
@@ -77,7 +91,7 @@ export class ChartGenerator extends Component {
                 borderRadius: 5,
                 minHeight: 500
               }}>
-              <LineChart data={LineChartArray} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
+              <LineChart data={data1} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
             </Card>
           </Col>
         </Row>
@@ -107,9 +121,9 @@ class TabComp extends Component {
     return (
           <div>
             <Tabs defaultActiveKey="1" onChange={this.callback} size="large">
-              {this.NestedTabChart(1, "All Activity", ["NAT Type", "O.S.", "Protocol", "Country"], "lineChart", Chart1Data)}
-              {this.NestedTabChart(2, "Country", ["NAT Type", "Protocol", "O.S."], "BarChart", Chart2Data, Chart2Data)}
-              {this.NestedTabChart(3, "Operating System", ["NAT Type", "Protocol", "O.S."], "BarChart", Chart3Data, Chart3Data)}
+              {this.NestedTabChart(1, "All Activity", ["NAT Type", "O.S.", "Protocol", "Country"], "lineChart", Chart1Data.values)}
+              {this.NestedTabChart(2, "Country", ["NAT Type", "Protocol", "O.S."], "tabbedBarChart", Chart2Data, Chart2Data)}
+              {this.NestedTabChart(3, "Operating System", ["NAT Type", "Protocol", "O.S."], "tabbedBarChart", Chart3Data, Chart3Data)}
             </Tabs>
           </div>
         );
