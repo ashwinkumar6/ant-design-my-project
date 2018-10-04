@@ -81,7 +81,15 @@ class Layouts extends Component {
               className="trigger"
               type={this.state.collapsed ? "menu-unfold" : "menu-fold"}
               onClick={this.toggle}
-            />
+            />    
+            <span class="topnav">
+              <a href="#">Hour</a>
+              <a href="#">Day</a>
+              <a href="#">Week</a>
+              <a href="#">Month</a>
+              <a class="active" href="#">
+                All Time
+              </a>
             <span className="date">
               <RangePicker
                 defaultValue={[
@@ -90,6 +98,7 @@ class Layouts extends Component {
                 ]}
                 format={dateFormat}
               />
+            </span>
             </span>
           </Header>
           <Content

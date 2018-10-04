@@ -7,6 +7,8 @@ import TabComp from "../components/TabComp";
 import DropdownOptions from "../components/SubComponents/DropDownRender";
 import { ChartGenerator } from "../components/TabComp"
 import RenderPieChart from "../components/SubComponents/PieChartRender"
+import ButtonGroup from "../components/ButtonGroup";
+import data from "../assets/data";
 
 function callback(key) {
     console.log(key);
@@ -17,7 +19,13 @@ class Protocol extends Component {
     render() {
         return (
             <div className="gutter-example">
-                <h1 style={{ padding: "10px 0px 0px 30px" }}>Protocol</h1>
+                {/* <h1 style={{ padding: "10px 0px 0px 30px" }}>Protocol</h1> */}
+                <span>
+                    <h1 style={{ padding: "10px 0px 0px 30px", display: "inline" }}>PROTOCOL</h1>
+                    <span style={{ float: "right", padding: "10px 20px 0px 0px" }}>
+                        Connection result: <ButtonGroup />
+                    </span>
+                </span>
                 <Row gutter={24} style={{ margin: "24px 8px" }}>
                     <Col className="gutter-row" span={24}>
                         <Card
@@ -65,7 +73,7 @@ class Protocol extends Component {
                                 minHeight: 280
                             }}
                         >
-                            <Tables />
+                            <Tables dataSource={data.logs}/>
                         </Card>
                     </Col>
                 </Row>

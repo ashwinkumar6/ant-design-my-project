@@ -6,62 +6,6 @@ import LineChart from "./LineChart";
 import { LineChartArray } from "../assets/data"
 const TabPane = Tabs.TabPane;
 
-function callback(key) {
-  console.log(key);
-}
-
-export class ChartGenerator extends Component {
-  render() {
-    console.log("inside tabbed line chart");
-    const { type,tabName1,tabName2,data1, data2 } = this.props;
-    if (type === "tabbedBarChart") {
-      return (
-        <Tabs defaultActiveKey="1" onChange={callback} size="large">
-          <TabPane tab={tabName1} key={1}>
-            <BarChartTabs chartData={data1} />
-          </TabPane>
-
-          <TabPane tab={tabName2} key={2}>
-            <BarChartTabs chartData={data2} />
-          </TabPane>
-        </Tabs>
-      )
-    }
-    else if(type === "tabbedLineChart")
-    {
-      console.log("inside tabbed line chart")
-      return (
-        <div>
-        <Tabs defaultActiveKey="1" onChange={callback} size="large">
-          <TabPane tab={tabName1} key={1}>
-            <LineChartTabs/>
-          </TabPane>
-
-          <TabPane tab={tabName2} key={2}>
-            <LineChartTabs/>
-          </TabPane>
-        </Tabs>
-        </div>
-      )
-    }
-    else {
-      return (
-        <Row gutter={24} style={{ margin: "24px 8px" }}>
-          <Col className="gutter-row" span={24}>
-            <Card
-              style={{
-                background: "#fff",
-                borderRadius: 5,
-                minHeight: 500
-              }}>
-              <LineChart data={LineChartArray} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
-            </Card>
-          </Col>
-        </Row>
-      )
-    }
-  }
-}
 
 export class BarChartTabs extends Component {
   render() {
@@ -102,7 +46,50 @@ export class LineChartTabs extends Component {
   }
 }
 
+
+export class ChartGenerator extends Component {
+  callback(key) {
+    console.log(key);
+  }  
+  render() {
+    console.log("inside tabbed line chart");
+    const { type,tabName1,tabName2,data1, data2 } = this.props;
+    if (type === "BarChart") {
+      return (
+        <Tabs defaultActiveKey="1" onChange={this.callback} size="large">
+          <TabPane tab={tabName1} key={1}>
+            <BarChartTabs chartData={data1} />
+          </TabPane>
+
+          <TabPane tab={tabName2} key={2}>
+            <BarChartTabs chartData={data2} />
+          </TabPane>
+        </Tabs>
+      )
+    }
+    else {
+      return (
+        <Row gutter={24} style={{ margin: "24px 8px" }}>
+          <Col className="gutter-row" span={24}>
+            <Card
+              style={{
+                background: "#fff",
+                borderRadius: 5,
+                minHeight: 500
+              }}>
+              <LineChart data={LineChartArray} height={400} titleMap={{ y1: 'Total', y2: 'Successful', y3: 'Failed' }} />
+            </Card>
+          </Col>
+        </Row>
+      )
+    }
+  }
+}
+
 class TabComp extends Component {
+  callback(key) {
+    console.log(key);
+  }  
 
   NestedTabChart(key, tabName, tabTypes, chartType, chartData1, chartData2) {
     return (
@@ -119,10 +106,10 @@ class TabComp extends Component {
     const Chart3Data = this.props.chartData[2];
     return (
           <div>
-            <Tabs defaultActiveKey="1" onChange={callback} size="large">
-              {this.NestedTabChart(1, "All Activity", ["NAT Type", "O.S.", "Protocol", "Country"], "lineChart", null, null)}
-              {this.NestedTabChart(2, "Country", ["NAT Type", "Protocol", "O.S."], "tabbedBarChart", Chart2Data, Chart2Data)}
-              {this.NestedTabChart(3, "Operating System", ["NAT Type", "Protocol", "O.S."], "tabbedBarChart", Chart3Data, Chart3Data)}
+            <Tabs defaultActiveKey="1" onChange={this.callback} size="large">
+              {this.NestedTabChart(1, "All Activity", ["NAT Type", "O.S.", "Protocol", "Country"], "lineChart", Chart1Data)}
+              {this.NestedTabChart(2, "Country", ["NAT Type", "Protocol", "O.S."], "BarChart", Chart2Data, Chart2Data)}
+              {this.NestedTabChart(3, "Operating System", ["NAT Type", "Protocol", "O.S."], "BarChart", Chart3Data, Chart3Data)}
             </Tabs>
           </div>
         );

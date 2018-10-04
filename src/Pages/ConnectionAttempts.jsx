@@ -87,7 +87,7 @@ class ConnectionAttempts extends Component {
                 minHeight: 280
               }}
             >
-              <Tables />
+              <Tables dataSource={data.logs}/>
             </Card>
           </Col>
         </Row>

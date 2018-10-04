@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Table} from "antd";
 
 import "./Tables.css";
-import data from '../assets/data';
+//import data from '../assets/data';
 import columns from '../assets/tableData/tableColumn';
 
-const dataSource = [];
-data.logs.forEach(log => {
+
+function filterLogs(rawData){
+  var dataSource = [];
+  rawData.forEach(log => {
     dataSource.push({
         key: Math.floor(Math.random()*10000),
         num: 7304,
@@ -18,13 +20,17 @@ data.logs.forEach(log => {
         country: [log.peer_requester.geo_info.country_name, log.peer_responder.geo_info.country_name]
     });
 });
+return dataSource
+}
 
 class Tables extends Component {
   render() {
+    const {dataSource} = this.props;
+    var filterData=filterLogs(dataSource)  
     return (
       <div>
         <Table
-          dataSource={dataSource}
+          dataSource={filterData}
           columns={columns}
           bordered
           pagination={false}
